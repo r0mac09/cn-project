@@ -1,16 +1,18 @@
 import tkinter
 import credentials
 import session
+import mail
 	
 from tkinter import *
 from credentials import *
 from session import *
+from mail import *
 
 class SessionWindow():
     def __init__(self):
         self.window = Tk()
-        self.window.title("Session v0.1")
-        self.window.geometry('350x200')
+        self.window.title("Chat\'s Up v0.1")
+        self.window.geometry('300x500')
 
         self.window.mainloop()
 
@@ -84,7 +86,7 @@ class SignUpWindow():
 class LoginWindow():
     def __init__(self):
         self.window = Tk()
-        self.window.title("CNizator v0.1")
+        self.window.title("Chat's Up v0.1")
         self.window.geometry('350x200')
 
         login_label = Label(self.window, text="Login", font=("Helvetica", 14))
@@ -105,7 +107,7 @@ class LoginWindow():
         login_button = Button(self.window, text="Login", bg="light blue", fg="white", command=self.login_action)
         login_button.grid(column=1, row=3)
 
-        resetpsd_button = Button(self.window, text="Reset Password", bg="light blue", fg="white", command=self.login_action)
+        resetpsd_button = Button(self.window, text="Reset Password", bg="light blue", fg="white", command=self.resetpsd_action)
         resetpsd_button.grid(column=2, row=3)
 
         ots_button = Button(self.window, text ="One Time Session", bg="orange", fg="white")
@@ -146,6 +148,10 @@ class LoginWindow():
 
     def signup_action(self):
         SignUpWindow()
+
+    def resetpsd_action(self):
+        m = Mail()
+        m.send_mail('mihaescuac@gmail.com', 'It works!')
 
 login_window = LoginWindow()
 

@@ -74,5 +74,5 @@ class SignUp():
     
     def add_db(self):
         f = open('C:\\Users\\Mihaescu\\Desktop\\cn-project\\v1\\db.txt', 'a')
-        f.write(self.u + ' ' + self.e + ' ' + self.h)
+        f.write(self.u + ' ' + self.e + ' ' + self.h + '\n')
         f.close()
