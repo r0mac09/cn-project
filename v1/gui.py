@@ -19,7 +19,7 @@ class SignUpWindow():
     def __init__(self):
         self.window = Tk()
         self.window.title("Sign Up v0.1")
-        self.window.geometry('350x350')
+        self.window.geometry('270x160')
 
         signup_label = Label(self.window, text="Sign Up", font=("Helvetica", 14))
         signup_label.grid(column=0, row=0)
@@ -52,7 +52,7 @@ class SignUpWindow():
         signup_button.grid(column=1, row=6)
 
         cancel_button = Button(self.window, text="Cancel", bg="red", fg="white", command=self.cancel_action)
-        cancel_button.grid(column=2, row=6)
+        cancel_button.grid(column=0, row=6)
 
         self.window.mainloop()
 
@@ -85,7 +85,7 @@ class LoginWindow():
     def __init__(self):
         self.window = Tk()
         self.window.title("CNizator v0.1")
-        self.window.geometry('270x200')
+        self.window.geometry('350x200')
 
         login_label = Label(self.window, text="Login", font=("Helvetica", 14))
         login_label.grid(column=0, row=0)
@@ -102,11 +102,11 @@ class LoginWindow():
         self.psd = Entry(self.window, width=24)
         self.psd.grid(column=1, row=2)
 
-        self.test_label = Label(self.window, text="Nada", font=("Helvetica", 12))
-        self.test_label.grid(column=0, row=5)
-
         login_button = Button(self.window, text="Login", bg="light blue", fg="white", command=self.login_action)
         login_button.grid(column=1, row=3)
+
+        resetpsd_button = Button(self.window, text="Reset Password", bg="light blue", fg="white", command=self.login_action)
+        resetpsd_button.grid(column=2, row=3)
 
         ots_button = Button(self.window, text ="One Time Session", bg="orange", fg="white")
         ots_button.grid(column=0, row=4)
@@ -119,25 +119,33 @@ class LoginWindow():
     def login_action(self):
         user = self.usr.get()
         password = self.psd.get()
-        self.test_label.configure(text=user + password)
+
+        nousr_label = Label(self.window, text='', font=("Helvetica", 12))
+        nousr_label.grid(column=2, row=1)
+        nopsd_label = Label(self.window, text='', font=("Helvetica", 12))
+        nopsd_label.grid(column=2, row=2)
 
         if user == "":
-            nousr_label = Label(self.window, text='no user', font=("Helvetica", 12))
-            nousr_label.grid(column=2, row=1)
+            nousr_label.configure(text='                  ')
+            nousr_label.configure(text='no user           ')
+        elif not check_user_exists(user):
+            nousr_label.configure(text='                  ')
+            nousr_label.configure(text='inexistent')
+        else:
+            nousr_label.configure(text='                  ')
 
         if password == "":
-            nopsd_label = Label(self.window, text='no password', font=("Helvetica", 12))
-            nopsd_label.grid(column=2, row=2)
+            nopsd_label.configure(text='no password')          
+        else :
+            nopsd_label.configure(text='                       ')
 
 
         l = Login(user, password)
         if l.authenticate_user():
-            session_window = SessionWindow()
-            self.usr = Entry(self.window, width=24, state='disabled')
-            self.psd = Entry(self.window, width=24, state='disabled')
+            SessionWindow()
 
     def signup_action(self):
-        s = SignUpWindow()
+        SignUpWindow()
 
 login_window = LoginWindow()
 

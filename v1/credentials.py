@@ -54,13 +54,15 @@ class Login():
             print("Failed")
 
     def authenticate_user(self):
-        f = open('C:\\Users\\Mihaescu\\Desktop\\cn-project\\v1\\db.txt', "r")
+        f = open('v1\\db.txt', "r")
         for line in f:
             user = line.split()
-            if self.u == user[0] and self.h == user[2].decode('hex'):
+            if self.u == user[0] and str(hashlib.sha256(self.p.encode()).hexdigest()) == user[2]: #check on this
+                f.close()
                 return True
-
+        f.close()
         return False
+
 
 
 class SignUp():
