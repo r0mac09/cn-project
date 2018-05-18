@@ -1,12 +1,12 @@
 import tkinter
 import credentials
 import session
-import mail
+#import mail
 	
 from tkinter import *
 from credentials import *
 from session import *
-from mail import *
+#from mail import *
 
 class SessionWindow():
     def __init__(self):
